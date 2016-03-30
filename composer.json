@@ -1,0 +1,28 @@
+{
+    "name": "efraC/SlimGeek",
+    "type": "library",
+    "description": "Slim Framework, a PHP micro framework whit Facades and ServicesProviders",
+    "keywords": ["microframework","rest","router", "ServicesProvider", "Facades", "Laravel", "Eloquent"],
+    "homepage": "https://github.com/efraC/SlimGeek",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Efra Cuadras",
+            "email": "efrain@geeklopers.com",
+            "homepage": "http://www.geeklopers.com/",
+            "role": "developer"
+        }
+    ],
+    "require": {
+        "php": ">= 5.4.0",
+        "slim/slim": "2.4.*",
+        "illuminate/container": ">=5.0",
+        "illuminate/support": ">=5.0"
+        "illuminate/database" : ">=5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SlimGeek\\" : "src/"
+        }
+    }
+}
