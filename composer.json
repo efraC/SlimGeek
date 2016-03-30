@@ -1,5 +1,5 @@
 {
-    "name": "efracuadras/SlimGeek",
+    "name": "efracuadras/slimgeek",
     "type": "library",
     "description": "Slim Framework, a PHP micro framework whit Facades and ServicesProviders",
     "keywords": ["microframework","rest","router", "ServicesProvider", "Facades", "Laravel", "Eloquent"],
