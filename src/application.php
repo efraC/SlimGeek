@@ -41,7 +41,7 @@ class Application extends Container
 
         Facade::setFacadeApplication( $this );
         
-        $this->registerBaseServiceProviders()  
+        $this->registerBaseServiceProviders();  
     }
     /**
      * Boot all registered service providers
