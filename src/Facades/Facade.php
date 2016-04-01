@@ -1,5 +1,5 @@
 <?php
-namespace SlimGee\Facades;
+namespace SlimGeeK\Facades;
 
 use Illuminate\Support\Facades\Facade as IlluminateFacade;
 

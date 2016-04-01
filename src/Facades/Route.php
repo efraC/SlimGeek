@@ -1,5 +1,5 @@
 <?php
-namespace SlimFacades;
+namespace SlimGeek\Facades;
 
 class Route extends Facade
 {
