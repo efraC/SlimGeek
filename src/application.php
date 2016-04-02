@@ -7,6 +7,8 @@ use Illuminate\Container\Container;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Events\EventServiceProvider;
 use Illuminate\Database\DatabaseServiceProvider;
+use SlimGeek\Auth\AuthServiceProvider;
+use SlimGeek\Session\SessionServiceProvider;
 use SlimGeek\Facades\Facade;
 
 class Application extends Container
@@ -16,6 +18,9 @@ class Application extends Container
 
     public function __construct(Slim $app)
     {
+
+        $this->registerAliases();
+
         $this->app = $app;
 
         $this->singleton('slim', function() use($app)
@@ -36,6 +41,7 @@ class Application extends Container
         $app->hook('slim.before', function() use($service_manager)
         {
             $service_manager->boot();
+
         }, 1);    
 
 
@@ -63,13 +69,17 @@ class Application extends Container
         $this->register(new EventServiceProvider($this));
 
         $this->register(new DatabaseServiceProvider($this));
+
+        $this->register(new AuthServiceProvider($this));
+
+        $this->register(new SessionServiceProvider($this));
     }
 
 
     /**
      * Register a service provider with the application
      */
-    public function register(IlluminateServiceProvider $service)
+    public function register(ServiceProvider $service)
     {
         $this->services[] = $service;
         $service->register();
@@ -120,23 +130,24 @@ class Application extends Container
     public function registerAliases()
     {
         $aliases = [    
-            'App'       => SlimGeek\Facades\App::class,
-            'Config'    => SlimGeek\Facades\Config::class,
-            'Log'       => SlimGeek\Facades\Log::class,
-            'Request'   => SlimGeek\Facades\Request::class,
-            'Response'  => SlimGeek\Facades\Response::class,
-            'Route'     => SlimGeek\Facades\Route::class,
-            'View'      => SlimGeek\Facades\View::class,
-            'App'       => Illuminate\Support\Facades\App::class,
-            'DB'        => Illuminate\Support\Facades\DB::class,
-            'Schema'    => Illuminate\Support\Facades\Schema::class,
+            'App'       => \SlimGeek\Facades\App::class,
+            'Config'    => \SlimGeek\Facades\Config::class,
+            'Request'   => \SlimGeek\Facades\Request::class,
+            'Response'  => \SlimGeek\Facades\Response::class,
+            'Route'     => \SlimGeek\Facades\Route::class,
+            'View'      => \SlimGeek\Facades\View::class,
+            'Auth'      => \SlimGeek\Facades\Auth::class,
+            'Session'   => \SlimGeek\Facades\Session::class,
+            'App'       => \Illuminate\Support\Facades\App::class,
+            'DB'        => \Illuminate\Support\Facades\DB::class,
+            'Schema'    => \Illuminate\Support\Facades\Schema::class,
+
         ];
 
-        foreach ($aliases as $key => $aliases) {
-            foreach ((array) $aliases as $alias) {
-                $this->alias($key, $alias);
-            }
+        foreach ($aliases as $alias => $class) {
+            class_alias($class, $alias);
         }
+
     }
 
 

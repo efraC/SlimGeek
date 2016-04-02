@@ -6,7 +6,7 @@ class Route extends Facade
 
     protected static $NAMESPACE = "App\\Controllers\\";
     
-	protected static function getFacadeAccessor() { return self::$slim['router']; }
+    protected static function getFacadeAccessor() { return self::$slim->container['router']; }
 
     /**
      * Route resource to single controller
@@ -134,46 +134,76 @@ class Route extends Facade
 
     public static function map()
     {
-    	return call_user_func_array(array(self::$slim, 'map'), func_get_args());
+        $args = self::arguments( func_get_args() );
+
+        return call_user_func_array(array(self::$slim, 'map'), $args);
     }
 
     public static function get()
     {
-    	return call_user_func_array(array(self::$slim, 'get'), func_get_args());
+        $args = self::arguments( func_get_args() );
+
+        return call_user_func_array(array(self::$slim, 'get'), $args);
     }
 
     public static function post()
     {
-    	return call_user_func_array(array(self::$slim, 'post'), func_get_args());
+        $args = self::arguments( func_get_args() );
+
+        return call_user_func_array(array(self::$slim, 'post'), $args);
     }
 
     public static function put()
     {
-    	return call_user_func_array(array(self::$slim, 'put'), func_get_args());
+        $args = self::arguments( func_get_args() );
+
+        return call_user_func_array(array(self::$slim, 'put'), $args);
     }
 
     public static function patch()
     {
-    	return call_user_func_array(array(self::$slim, 'patch'), func_get_args());
+        $args = self::arguments( func_get_args() );
+
+        return call_user_func_array(array(self::$slim, 'patch'), $args);
     }
 
     public static function delete()
     {
-    	return call_user_func_array(array(self::$slim, 'delete'), func_get_args());
+        $args = self::arguments( func_get_args() );
+
+        return call_user_func_array(array(self::$slim, 'delete'), $args);
     }
 
     public static function options()
     {
-    	return call_user_func_array(array(self::$slim, 'options'), func_get_args());
+        $args = self::arguments( func_get_args() );
+
+        return call_user_func_array(array(self::$slim, 'options'), $args);
     }
 
     public static function group()
     {
-    	return call_user_func_array(array(self::$slim, 'group'), func_get_args());
+        $args = self::arguments( func_get_args() );
+
+        return call_user_func_array(array(self::$slim, 'group'), $args);
     }
 
     public static function any()
     {
-    	return call_user_func_array(array(self::$slim, 'any'), func_get_args());
+        $args = self::arguments( func_get_args() );
+
+        return call_user_func_array(array(self::$slim, 'any'), $args);
+    }
+
+    public static function arguments( $args )
+    {
+        $callable = array_pop($args);
+
+        if( is_string( $callable ) ){
+            $callable = self::$NAMESPACE.$callable;
+        }
+        array_push( $args, $callable );
+
+        return $args;
     }
 }

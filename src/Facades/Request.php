@@ -3,9 +3,9 @@ namespace SlimGeek\Facades;
 
 class Request extends Facade
 {
-	protected static function getFacadeAccessor() { return self::$slim['request']; }
+    protected static function getFacadeAccessor() { return self::$slim->container['request']; }
 
-	public static function getParams(){
+    public static function getParams(){
         $app = self::$slim;
 
         $body = json_decode( $app->request->getBody(), true ) ? json_decode( $app->request->getBody(), true ) :  [];
