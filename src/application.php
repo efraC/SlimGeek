@@ -9,6 +9,7 @@ use Illuminate\Events\EventServiceProvider;
 use Illuminate\Database\DatabaseServiceProvider;
 use SlimGeek\Auth\AuthServiceProvider;
 use SlimGeek\Session\SessionServiceProvider;
+use SlimGeek\Pagination\PaginationServiceProvider;
 use SlimGeek\Facades\Facade;
 
 class Application extends Container
@@ -73,6 +74,8 @@ class Application extends Container
         $this->register(new AuthServiceProvider($this));
 
         $this->register(new SessionServiceProvider($this));
+
+        $this->register(new PaginationServiceProvider($this));
     }
 
 
