@@ -5,7 +5,7 @@ namespace SlimGeek;
 
 use ArrayAccess;
 use Illuminate\Support\Arr;
-use Slim\Slim
+use Slim\Slim;
 
 class Config implements ArrayAccess
 {

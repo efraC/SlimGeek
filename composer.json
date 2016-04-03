@@ -19,6 +19,7 @@
         "illuminate/container": ">=5.0",
         "illuminate/support": ">=5.0",
         "illuminate/database": ">=5.0",
+        "illuminate/pagination": ">=5.0",
         "illuminate/events": ">=5.0"
     },
     "autoload": {
