@@ -132,18 +132,19 @@ class Application extends Container
      */
     public function registerAliases()
     {
-        $aliases = [    
-            'App'       => \SlimGeek\Facades\App::class,
-            'Config'    => \SlimGeek\Facades\Config::class,
-            'Request'   => \SlimGeek\Facades\Request::class,
-            'Response'  => \SlimGeek\Facades\Response::class,
-            'Route'     => \SlimGeek\Facades\Route::class,
-            'View'      => \SlimGeek\Facades\View::class,
-            'Auth'      => \SlimGeek\Facades\Auth::class,
-            'Session'   => \SlimGeek\Facades\Session::class,
-            'App'       => \Illuminate\Support\Facades\App::class,
-            'DB'        => \Illuminate\Support\Facades\DB::class,
-            'Schema'    => \Illuminate\Support\Facades\Schema::class,
+        
+        $aliases = [
+            'App'       => '\\SlimGeek\\Facades\\App',
+            'Config'    => '\\SlimGeek\\Facades\\Config',
+            'Request'   => '\\SlimGeek\\Facades\\Request',
+            'Response'  => '\\SlimGeek\\Facades\\Response',
+            'Route'     => '\\SlimGeek\\Facades\\Route',
+            'View'      => '\\SlimGeek\\Facades\\View',
+            'Auth'      => '\\SlimGeek\\Facades\\Auth',
+            'Session'   => '\\SlimGeek\\Facades\\Session',
+            'App'       => '\\Illuminate\\Support\\Facades\\App',
+            'DB'        => '\\Illuminate\\Support\\Facades\\DB',
+            'Schema'    => '\\Illuminate\\Support\\Facades\\Schema',
 
         ];
 
