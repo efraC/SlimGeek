@@ -1,6 +1,8 @@
 <?php
 namespace SlimGeek\Facades;
 
+use Illuminate\Support\Arr;
+
 class Request extends Facade
 {
     protected static function getFacadeAccessor() { return self::$slim->container['request']; }
@@ -41,5 +43,67 @@ class Request extends Facade
             return isset($_FILES[$name]) && $_FILES[$name]['size'] ? $_FILES[$name] : null;
         else
             return $_FILES;
+    }
+
+    /**
+     * Get all of the input and files for the request.
+     *
+     * @return array
+     */
+    public function all()
+    {
+        return self::getParams();
+    }
+
+    /**
+     * Get a subset of the items from the input data.
+     *
+     * @param  array|mixed  $keys
+     * @return array
+     */
+    public function only($keys)
+    {
+        $keys = is_array($keys) ? $keys : func_get_args();
+
+        $results = [];
+
+        $input = self::all();
+
+        foreach ($keys as $key) {
+            Arr::set($results, $key, Arr::get($input, $key));
+        }
+
+        return $results;
+    }
+
+    /**
+     * Get all of the input except for a specified array of items.
+     *
+     * @param  array  $keys
+     * @return array
+     */
+    public function except($keys)
+    {
+        $keys = is_array($keys) ? $keys : func_get_args();
+
+        $results = self::all();
+
+        Arr::forget($results, $keys);
+
+        return $results;
+    }
+
+    /**
+     * Retrieve an input item from the request.
+     *
+     * @param  string  $key
+     * @param  mixed   $default
+     * @return string|array
+     */
+    public function inputGet($key = null, $default = null)
+    {
+        $input = self::all();
+
+        return array_get($input, $key, $default);
     }
 }
